@@ -12,6 +12,6 @@ namespace Maquiagem.Infra.Data
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options) { }
 
-		// DbSets aqui
+		
 	}
 }
