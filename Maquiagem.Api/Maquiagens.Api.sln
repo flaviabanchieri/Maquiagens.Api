@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquiagem.Api", "Maquiagem.Api.csproj", "{1FE831F9-5990-4255-A115-4850B9876CF2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{01C855CC-271A-4EEF-9479-1F9B6975F7C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquiagem.Domain", "..\Maquiagem.Domain\Maquiagem.Domain.csproj", "{DAE59F5E-7396-494D-9495-D2CD5B1A0729}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquiagem.Infra", "..\Maquiagem.Infra\Maquiagem.Infra.csproj", "{41E38071-563E-4D6B-B765-19ADF075EE95}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquiagem.Application", "..\Maquiagem.Application\Maquiagem.Application.csproj", "{EED94EF2-6E3C-4A45-A378-2D52C44095AB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maquiagem.Testes", "..\Maquiagem.Testes\Maquiagem.Testes.csproj", "{93A081F6-B0EF-43E9-B0B1-984B6CD4E117}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FE831F9-5990-4255-A115-4850B9876CF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FE831F9-5990-4255-A115-4850B9876CF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FE831F9-5990-4255-A115-4850B9876CF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FE831F9-5990-4255-A115-4850B9876CF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAE59F5E-7396-494D-9495-D2CD5B1A0729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAE59F5E-7396-494D-9495-D2CD5B1A0729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAE59F5E-7396-494D-9495-D2CD5B1A0729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAE59F5E-7396-494D-9495-D2CD5B1A0729}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41E38071-563E-4D6B-B765-19ADF075EE95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41E38071-563E-4D6B-B765-19ADF075EE95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41E38071-563E-4D6B-B765-19ADF075EE95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41E38071-563E-4D6B-B765-19ADF075EE95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EED94EF2-6E3C-4A45-A378-2D52C44095AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EED94EF2-6E3C-4A45-A378-2D52C44095AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EED94EF2-6E3C-4A45-A378-2D52C44095AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EED94EF2-6E3C-4A45-A378-2D52C44095AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93A081F6-B0EF-43E9-B0B1-984B6CD4E117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93A081F6-B0EF-43E9-B0B1-984B6CD4E117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93A081F6-B0EF-43E9-B0B1-984B6CD4E117}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93A081F6-B0EF-43E9-B0B1-984B6CD4E117}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1FE831F9-5990-4255-A115-4850B9876CF2} = {01C855CC-271A-4EEF-9479-1F9B6975F7C9}
+		{DAE59F5E-7396-494D-9495-D2CD5B1A0729} = {01C855CC-271A-4EEF-9479-1F9B6975F7C9}
+		{41E38071-563E-4D6B-B765-19ADF075EE95} = {01C855CC-271A-4EEF-9479-1F9B6975F7C9}
+		{EED94EF2-6E3C-4A45-A378-2D52C44095AB} = {01C855CC-271A-4EEF-9479-1F9B6975F7C9}
+		{93A081F6-B0EF-43E9-B0B1-984B6CD4E117} = {01C855CC-271A-4EEF-9479-1F9B6975F7C9}
+	EndGlobalSection
+EndGlobal

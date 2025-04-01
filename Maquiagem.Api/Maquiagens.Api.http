@@ -1,0 +1,6 @@
+@Maquiagens.Api_HostAddress = http://localhost:5098
+
+GET {{Maquiagens.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
