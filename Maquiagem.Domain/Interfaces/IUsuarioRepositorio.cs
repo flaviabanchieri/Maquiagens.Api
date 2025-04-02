@@ -1,4 +1,4 @@
-﻿using Maquiagem.Application.DTOs.Produtos;
+﻿using Maquiagem.Application.DTOs.Auth;
 using Maquiagem.Domain.Entidades;
 using System;
 using System.Collections.Generic;
@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Domain.Interfaces
 {
-	public interface IProductRepositorio : IRepositorioBase<Product>
+	public interface IUsuarioRepositorio : IRepositorioBase<Usuario>
 	{
-		Task<Product> GetById(long id);
+		Task<Usuario> ObterPorEmaileSenha(UsuarioDto dto);
 	}
 }

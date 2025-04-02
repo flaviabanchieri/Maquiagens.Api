@@ -8,8 +8,7 @@ using Maquiagem.Application.Interfaces;
 
 namespace Maquiagem.Infra.Repositorios
 {
-	public class RepositorioBase<TId, TEntity> : IRepositorioBase<TId, TEntity>
-		where TId : struct
+	public class RepositorioBase<TEntity> : IRepositorioBase<TEntity>
 		where TEntity : EntityBase<TEntity>
 	{
 		private readonly DbSet<TEntity> _dbSet;
@@ -43,12 +42,12 @@ namespace Maquiagem.Infra.Repositorios
 		public async Task<IEnumerable<TEntity>> BuscarAsyncAsNoTracking(Expression<Func<TEntity, bool>> predicate) =>
 			await _dbSet.AsNoTracking().Where(predicate).ToListAsync();
 
-		public async Task<TEntity> ObterPorIdAsyncAsNoTracking(long id) =>
+		public async Task<TEntity> ObterPorIdAsyncAsNoTracking(int id) =>
 			await _dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
 
 		public async Task<IEnumerable<TEntity>> ListarAsync() => await _dbSet.ToListAsync();
 
-		public async Task<TEntity> ObterPorIdAsync(TId id) =>
+		public async Task<TEntity> ObterPorIdAsync(int id) =>
 			await _dbSet.FindAsync(id);
 
 		public void Dispose() => _context?.Dispose();

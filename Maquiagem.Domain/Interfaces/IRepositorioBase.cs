@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace Maquiagem.Domain.Interfaces
 {
-	public interface IRepositorioBase<TId, TEntity> : IDisposable
+	public interface IRepositorioBase<TEntity> : IDisposable
 	{
 		Task AdicionarAsync(TEntity obj);
 		Task AdicionarMultiplosAsync(List<TEntity> lista);
@@ -12,8 +12,8 @@ namespace Maquiagem.Domain.Interfaces
 		Task<IEnumerable<TEntity>> BuscarAsyncAsNoTracking(Expression<Func<TEntity, bool>> predicate);
 		Task<IEnumerable<TEntity>> ListarAsync();
 		Task<IEnumerable<TEntity>> ListarAsyncAsNoTracking();
-		Task<TEntity> ObterPorIdAsync(TId id);
-		Task<TEntity> ObterPorIdAsyncAsNoTracking(long id);
+		Task<TEntity> ObterPorIdAsync(int id);
+		Task<TEntity> ObterPorIdAsyncAsNoTracking(int id);
 		void Remover(TEntity obj);
 		void RemoverMutiplos(List<TEntity> lista);
 		IUnitOfWork UnitOfWork { get; }

@@ -10,7 +10,9 @@ namespace Maquiagem.Api.Configurations
 		public static void RegisterServices(this IServiceCollection services)
 		{
 			services.AddScoped<IProductRepositorio, ProductRepositorio>();
+			services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 			services.AddHttpClient<IProductService, ProductServices>();
+			services.AddHttpClient<ITokenService, ITokenService>();
 		}
 	}
 }

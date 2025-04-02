@@ -2,9 +2,12 @@ using AutoMapper;
 using IntegradorAnuncios.Api.Mapper;
 using Maquiagem.Api.Configurations;
 using Maquiagem.Infra.Data;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +84,28 @@ builder.Services.AddDbContext<MaquiagemDbContext>((serviceProvider, dbContextBui
 
 });
 
+builder.Services.AddAuthentication(x =>
+{
+	x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+	x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options => {
+	options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters { 
+		//Comentei aqui para lembrar:
+		//É quem emite o token
+		ValidateIssuer = true,
+		//É para quem é emitido o token
+		ValidateAudience = true,
+		ValidateLifetime = true,
+		ValidateIssuerSigningKey = true,
+		ValidIssuer = builder.Configuration["Jwt:Issuer"],
+		ValidAudience = builder.Configuration["Jwt:Audience"],
+		//chave secreta usada para assinar
+		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+	};
+});
+
+
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -91,7 +116,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
 app.UseAuthorization();
-
+app.UseAuthentication();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

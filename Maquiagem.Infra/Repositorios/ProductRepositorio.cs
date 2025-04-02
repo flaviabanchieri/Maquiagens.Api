@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Infra.Repositorios
 {
-	public class ProductRepositorio : RepositorioBase<long, Product>, IProductRepositorio
+	public class ProductRepositorio : RepositorioBase<Product>, IProductRepositorio
 	{
 		private readonly MaquiagemDbContext _context;
 
