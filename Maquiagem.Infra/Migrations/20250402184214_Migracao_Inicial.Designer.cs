@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maquiagem.Infra.Migrations
 {
     [DbContext(typeof(MaquiagemDbContext))]
-    [Migration("20250401153944_MigracaoInicial")]
-    partial class MigracaoInicial
+    [Migration("20250402184214_Migracao_Inicial")]
+    partial class Migracao_Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,9 +44,11 @@ namespace Maquiagem.Infra.Migrations
 
                     b.HasKey("Id");
 
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
+
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Carrinho");
+                    b.ToTable("Carrinho", "dbo");
                 });
 
             modelBuilder.Entity("Maquiagem.Domain.Entidades.Compra", b =>
@@ -68,9 +70,35 @@ namespace Maquiagem.Infra.Migrations
 
                     b.HasKey("Id");
 
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
+
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("Compra");
+                    b.ToTable("Compra", "dbo");
+                });
+
+            modelBuilder.Entity("Maquiagem.Domain.Entidades.CompraItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CompraId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
+
+                    b.ToTable("CompraItem", "dbo");
                 });
 
             modelBuilder.Entity("Maquiagem.Domain.Entidades.Usuario", b =>

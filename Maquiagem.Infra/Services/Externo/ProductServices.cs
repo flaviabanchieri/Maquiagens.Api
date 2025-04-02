@@ -10,6 +10,7 @@ using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Maquiagem.Infra.Services.Externo
 {
@@ -22,44 +23,60 @@ namespace Maquiagem.Infra.Services.Externo
 		{
 			_httpClient = httpClient;
 			_productRepositorio = productRepositorio;
-			_httpClient.BaseAddress = new Uri("http://makeup-api.herokuapp.com/api/v1/products.json");
 		}
 
 		public async Task<List<ProductDto>> ObterProdutos(ProdutosFiltroDto filtro)
 		{
+			var queryString = ConstruirQueryString(filtro);
+			var url = "http://makeup-api.herokuapp.com/api/v1/products.json" + queryString;
+			List<ProductDto> products = new();
 			try
 			{
-				var response = await _httpClient.GetAsync("http://makeup-api.herokuapp.com/api/v1/products.json");
+				var response = await _httpClient.GetAsync(url);
 
 				response.EnsureSuccessStatusCode(); 
 
 				var jsonString = await response.Content.ReadAsStringAsync();
-
-				var products = JsonSerializer.Deserialize<List<ProductDto>>(jsonString);
+				
+				products = JsonSerializer.Deserialize<List<ProductDto>>(jsonString);
 
 				if (products == null || products.Count == 0)
 				{
 					Console.WriteLine("Nenhum produto encontrado na API.");
-					return null;
 				}
 
-				return products;
 			}
 			catch (HttpRequestException ex)
 			{
 				Console.WriteLine($"Erro na requisição HTTP: {ex.Message}");
-				return null;
 			}
 			catch (JsonException ex)
 			{
 				Console.WriteLine($"Erro na desserialização JSON: {ex.Message}");
-				return null;
 			}
 			catch (Exception ex)
 			{
 				Console.WriteLine($"Erro inesperado: {ex.Message}");
-				return null;
 			}
+			return products;
+		}
+
+		private string ConstruirQueryString(ProdutosFiltroDto filtro)
+		{
+			var queryParams = HttpUtility.ParseQueryString(string.Empty);
+
+			if (filtro.Id > 0) queryParams["id"] = filtro.Id.ToString();
+			if (!string.IsNullOrEmpty(filtro.ProductType)) queryParams["product_type"] = filtro.ProductType;
+			if (!string.IsNullOrEmpty(filtro.ProductCategory)) queryParams["product_category"] = filtro.ProductCategory;
+			if (filtro.ProductTags != null && filtro.ProductTags.Any()) queryParams["product_tags"] = string.Join(",", filtro.ProductTags);
+			if (!string.IsNullOrEmpty(filtro.Brand)) queryParams["brand"] = filtro.Brand;
+			if (filtro.PriceGreaterThan.HasValue) queryParams["price_greater_than"] = filtro.PriceGreaterThan.Value.ToString();
+			if (filtro.PriceLessThan.HasValue) queryParams["price_less_than"] = filtro.PriceLessThan.Value.ToString();
+			if (filtro.RatingGreaterThan.HasValue) queryParams["rating_greater_than"] = filtro.RatingGreaterThan.Value.ToString("F1");
+			if (filtro.RatingLessThan.HasValue) queryParams["rating_less_than"] = filtro.RatingLessThan.Value.ToString("F1");
+
+			var queryString = queryParams.ToString();
+			return string.IsNullOrEmpty(queryString) ? string.Empty : "?" + queryString;
 		}
 	}
 }
