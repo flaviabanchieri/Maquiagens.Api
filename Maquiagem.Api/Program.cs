@@ -1,12 +1,14 @@
+using AutoMapper;
+using IntegradorAnuncios.Api.Mapper;
+using Maquiagem.Api.Configurations;
 using Maquiagem.Infra.Data;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<ApplicationDbContext>(options =>
-	options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -51,6 +53,23 @@ builder.Services.AddSwaggerGen(c =>
 			new List<string>()
 		}
 	});
+});
+var mappingConfig = new MapperConfiguration(mc =>
+{
+	mc.AddProfile(new MappingProfile());
+});
+
+IMapper mapper = mappingConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.RegisterServices();
+
+var connectionString = string.Empty;
+
+builder.Services.AddDbContext<MaquiagemDbContext>((serviceProvider, dbContextBuilder) =>
+{
+	connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+	dbContextBuilder.UseSqlServer(connectionString);
+
 });
 
 var app = builder.Build();
