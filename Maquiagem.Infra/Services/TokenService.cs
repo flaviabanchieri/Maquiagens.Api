@@ -1,4 +1,5 @@
 ﻿using Maquiagem.Application.DTOs.Auth;
+using Maquiagem.Domain.Entidades;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
@@ -25,19 +26,25 @@ namespace Maquiagem.Infra.Services
 
 		public string GenerateToken(UsuarioDto user)
 		{
-			var tokenHandler = new JwtSecurityTokenHandler();
-			var key = Encoding.ASCII.GetBytes(_configuration["Jwt:Key"]);
-			var tokenDescriptor = new SecurityTokenDescriptor
+			var claims = new[]
 			{
-				Subject = new ClaimsIdentity(new Claim[]
-				{
-					new Claim(ClaimTypes.Name, user.Email.ToString())
-				}),
-				Expires = DateTime.UtcNow.AddHours(2),
-				SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+				new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+				new Claim("UserId", user.Id.ToString()),
+				new Claim("Email", user.Email.ToString()),
+
 			};
-			var token = tokenHandler.CreateToken(tokenDescriptor);
-			return tokenHandler.WriteToken(token);
+
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+			var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+			var token = new JwtSecurityToken(
+				_configuration["Jwt:Issuer"], 
+				_configuration["Jwt:Audience"],
+				claims, expires: DateTime.UtcNow.AddMinutes(60), 
+				signingCredentials: signIn
+				);
+			string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
+			return tokenValue;
 		}
 	}
 }
