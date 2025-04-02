@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Maquiagens.Api.Controllers
 {
     [ApiController]
-    [Route("api/products")]
+    [Route("api/produtos")]
     [Tags("Produtos")]
     public class ProdutosController : ControllerBase
     {
@@ -41,7 +41,7 @@ namespace Maquiagens.Api.Controllers
 		[HttpGet("tags")]
 		public IActionResult GetTags()
 		{
-			return Ok(ConstantesDeProduto.Tags.OrderBy(t => t));
+			return Ok(ConstantesDeProduto.Tags);
 		}
 	}
 }
