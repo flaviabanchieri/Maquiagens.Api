@@ -11,6 +11,7 @@ namespace Maquiagem.Domain.Entidades
 		public required string Nome { get; set; }
 		public required string Email { get; set; }
 		public required string Senha { get; set; }
+		public required string SenhaSalt { get; set; }
 		public ICollection<Carrinho> Carrinho { get; set; } 
 		public ICollection<Compra> Compras { get; set; } 
 		

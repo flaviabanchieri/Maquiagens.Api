@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maquiagem.Domain.Entidades
+namespace Maquiagem.Application.Utils
 {
+
 	public class ConstantesDeProduto
 	{
 		public static readonly Dictionary<string, string> Tags = new Dictionary<string, string>

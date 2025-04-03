@@ -1,5 +1,6 @@
 using Maquiagem.Application.DTOs.Produtos;
 using Maquiagem.Application.Interfaces;
+using Maquiagem.Application.Utils;
 using Maquiagem.Domain.Entidades;
 using Maquiagem.Infra.Services.Externo;
 using Microsoft.AspNetCore.Mvc;

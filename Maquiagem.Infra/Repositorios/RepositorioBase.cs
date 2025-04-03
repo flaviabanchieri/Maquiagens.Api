@@ -20,8 +20,6 @@ namespace Maquiagem.Infra.Repositorios
 			_context = (MaquiagemDbContext)context;
 		}
 
-		public IUnitOfWork UnitOfWork => _context;
-
 		public async Task AdicionarAsync(TEntity obj) => await _dbSet.AddAsync(obj);
 
 		public async Task AdicionarMultiplosAsync(List<TEntity> lista) => await _dbSet.AddRangeAsync(lista);

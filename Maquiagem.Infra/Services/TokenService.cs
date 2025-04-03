@@ -1,4 +1,5 @@
 ﻿using Maquiagem.Application.DTOs.Auth;
+using Maquiagem.Application.Interfaces;
 using Maquiagem.Domain.Entidades;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
@@ -14,33 +15,33 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Infra.Services
 {
-	public class TokenService
+	public class TokenService : ITokenService
 	{
 
-		private readonly IConfiguration _configuration;
+		private readonly IConfiguration _config;
 
-		public TokenService(IConfiguration configuration)
+		public TokenService(IConfiguration config)
 		{
-			_configuration = configuration;
+			_config = config;
 		}
 
 		public string GenerateToken(UsuarioDto user)
 		{
 			var claims = new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+				new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 				new Claim("UserId", user.Id.ToString()),
 				new Claim("Email", user.Email.ToString()),
 
 			};
 
-			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+			var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
 			var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 			var token = new JwtSecurityToken(
-				_configuration["Jwt:Issuer"], 
-				_configuration["Jwt:Audience"],
-				claims, expires: DateTime.UtcNow.AddMinutes(60), 
+				_config["Jwt:Issuer"],
+				_config["Jwt:Audience"],
+				claims, expires: DateTime.UtcNow.AddMinutes(60),
 				signingCredentials: signIn
 				);
 			string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);

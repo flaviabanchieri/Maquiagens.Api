@@ -1,5 +1,4 @@
-﻿using Maquiagem.Application.Utils;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Application.Interfaces
 {
-	public interface IUnitOfWork
+	public interface IHashService
 	{
-		CommandResponse Commit();
+		string ComputeHash(string senha, string salt, int iteration);
+		string GenerateSalt();
 	}
 }

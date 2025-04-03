@@ -16,6 +16,5 @@ namespace Maquiagem.Domain.Interfaces
 		Task<TEntity> ObterPorIdAsyncAsNoTracking(int id);
 		void Remover(TEntity obj);
 		void RemoverMutiplos(List<TEntity> lista);
-		IUnitOfWork UnitOfWork { get; }
 	}
 }

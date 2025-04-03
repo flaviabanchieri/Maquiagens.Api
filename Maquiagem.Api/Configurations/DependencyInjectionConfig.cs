@@ -1,6 +1,9 @@
 ﻿using Maquiagem.Application.Interfaces;
 using Maquiagem.Domain.Interfaces;
+using Maquiagem.Infra.Data;
 using Maquiagem.Infra.Repositorios;
+using Maquiagem.Infra.Context;
+using Maquiagem.Infra.Services;
 using Maquiagem.Infra.Services.Externo;
 
 namespace Maquiagem.Api.Configurations
@@ -11,8 +14,10 @@ namespace Maquiagem.Api.Configurations
 		{
 			services.AddScoped<IProductRepositorio, ProductRepositorio>();
 			services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
+			services.AddScoped<IUnitOfWork, UnitOfWork>();
 			services.AddHttpClient<IProductService, ProductServices>();
-			services.AddHttpClient<ITokenService, ITokenService>();
+			services.AddScoped<ITokenService, TokenService>();
+			services.AddScoped<IHashService, HashService>();
 		}
 	}
 }

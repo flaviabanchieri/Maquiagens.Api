@@ -25,6 +25,8 @@ namespace Maquiagem.Infra.Mappings
 			builder.Property(e => e.Email)
 			.IsRequired();
 
+			builder.Property(e => e.SenhaSalt);
+
 			builder.Property(e => e.Senha)
 				.IsRequired();
 

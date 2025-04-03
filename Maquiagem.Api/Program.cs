@@ -64,6 +64,7 @@ var mappingConfig = new MapperConfiguration(mc =>
 
 IMapper mapper = mappingConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
+builder.Services.AddSingleton<IConfiguration>(builder.Configuration);
 builder.Services.RegisterServices();
 builder.Services.AddCors(options =>
 {
@@ -83,6 +84,7 @@ builder.Services.AddDbContext<MaquiagemDbContext>((serviceProvider, dbContextBui
 	dbContextBuilder.UseSqlServer(connectionString);
 
 });
+
 
 builder.Services.AddAuthentication(x =>
 {

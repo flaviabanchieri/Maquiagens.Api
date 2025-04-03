@@ -15,20 +15,44 @@ namespace Maquiagem.Api.Controllers
 	[Tags("Usuario")]
 	public class UsuarioController : Controller
 	{
-		IUsuarioRepositorio _usuarioRepositorio;
-		ITokenService _tokenService;
-		IConfiguration _config;
-		public UsuarioController(IUsuarioRepositorio usuarioRepositorio, IConfiguration config, ITokenService tokenService)
+		 private readonly IUsuarioRepositorio _usuarioRepositorio;
+		 private readonly ITokenService _tokenService;
+		 private readonly IUnitOfWork _unitOfWork;
+		private readonly  IHashService _hashService;
+		public UsuarioController(IUsuarioRepositorio usuarioRepositorio, IUnitOfWork unitOfWork, ITokenService tokenService, IHashService hashService)
 		{
 			_usuarioRepositorio = usuarioRepositorio;
-			_config=config;
+			_unitOfWork = unitOfWork;
 			_tokenService = tokenService;
+			_hashService=hashService;
 		}
 
 		[HttpPost]
 		[Route("Cadastro")]
-		public IActionResult Cadastro([FromBody] UsuarioDto usuario) { 
-			return View(usuario);
+		public async Task<IActionResult> Cadastro([FromBody] UsuarioDto dto) 
+		{
+			string senhaSalt = _hashService.GenerateSalt();
+			string senhaCriptografada = _hashService.ComputeHash(dto.Senha, senhaSalt, 3);
+
+			Usuario usuario = new() {
+				Nome = dto.Nome, 
+				Email = dto.Email,
+				Senha = senhaCriptografada,
+				SenhaSalt = senhaSalt
+			};
+
+			await _usuarioRepositorio.AdicionarAsync(usuario);
+			
+			try
+			{
+				var sucesso = _unitOfWork.Commit();
+				return Ok(new { mensagem = "Cadastro realizado com sucesso!" });
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(new {mensagem = ex.Message});
+				throw;
+			}				
 		}
 
 		[HttpPost]
