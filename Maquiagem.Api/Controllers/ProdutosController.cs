@@ -33,16 +33,28 @@ namespace Maquiagens.Api.Controllers
 			}
 		}
 
-		[HttpGet("brands")]
-		public IActionResult GetBrands()
+		[HttpGet("Marcas")]
+		public IActionResult ObterMarcas()
 		{
 			return Ok(ConstantesDeProduto.Brands.OrderBy(b => b));
 		}
 
-		[HttpGet("tags")]
-		public IActionResult GetTags()
+		[HttpGet("Tags")]
+		public IActionResult ObterTags()
 		{
 			return Ok(ConstantesDeProduto.Tags);
+		}
+
+		[HttpGet("Categorias")]
+		public IActionResult GetCategorias()
+		{
+			return Ok(ConstantesDeProduto.Categorias);
+		}
+
+		[HttpGet("Tipo")]
+		public IActionResult GetTipos()
+		{
+			return Ok(ConstantesDeProduto.Tipo);
 		}
 	}
 }

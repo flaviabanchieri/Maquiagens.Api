@@ -8,5 +8,7 @@ namespace Maquiagem.Application.DTOs.Compras.ComprasItens
 {
 	public class ComprasItensDto
 	{
+		public int ProdutoId { get; set; }
+		public int CompraId { get; set; }
 	}
 }

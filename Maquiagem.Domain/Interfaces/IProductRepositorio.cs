@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Domain.Interfaces
 {
-	public interface IProductRepositorio : IRepositorioBase<Product>
+	public interface IProductRepositorio : IRepositorioBase<Produto>
 	{
-		Task<Product> GetById(long id);
+		Task<Produto> GetById(long id);
 	}
 }

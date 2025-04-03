@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Domain.Entidades
 {
-	public class Product : EntityBase<Product>
+	public class Produto : EntityBase<Produto>
 	{
 		public int? Id { get; set; }
 		public string Brand { get; set; }
@@ -26,6 +26,6 @@ namespace Maquiagem.Domain.Entidades
 		public DateTime? UpdatedAt { get; set; }
 		public string ProductApiUrl { get; set; }
 		public string ApiFeaturedImage { get; set; }
-		public List<ProductColor> ProductColors { get; set; }
+		public List<CorProduto> ProductColors { get; set; }
 	}
 }

@@ -10,6 +10,7 @@ namespace Maquiagem.Domain.Interfaces
 {
 	public interface IUsuarioRepositorio : IRepositorioBase<Usuario>
 	{
-		Task<Usuario> ObterPorEmaileSenha(UsuarioDto dto);
+		Task<Usuario> ObterPorEmail(UsuarioDto dto);
+		Task<bool> ValidarUsuarioExistente(UsuarioDto dto);
 	}
 }

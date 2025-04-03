@@ -36,6 +36,36 @@ namespace Maquiagem.Application.Utils
 			{"water free", "Sem Água"}
 		};
 
+		public static readonly Dictionary<string, string> Categorias = new Dictionary<string, string>
+		{
+			{ "Powder", "Pó" },
+			{ "Cream", "Creme" },
+			{ "Pencil", "Lápis" },
+			{ "Liquid", "Líquido" },
+			{ "Gel", "Gel" },
+			{ "Palette", "Paleta" },
+			{ "Concealer", "Corretivo" },
+			{ "Contour", "Contorno" },
+			{ "Bb cc", "BB/CC Cream" },
+			{ "Mineral", "Mineral" },
+			{ "Highlighter", "Iluminador" },
+			{ "Lipstick", "Batom" },
+			{ "Lip gloss", "Brilho Labial" },
+			{ "Lip stain", "Tinta Labial" }
+		};
+		
+		public static readonly Dictionary<string, string> Tipo = new Dictionary<string, string>
+		{
+			{ "Blush", "Blush" },
+			{ "Bronzer", "Bronzer" },
+			{ "Eyebrow", "Sobrancelha" },
+			{ "Eyeliner", "Delineador" },
+			{ "Eyeshadow", "Sombra" },
+			{ "Foundation", "Base" },
+			{ "Lip liner", "Lápis de Boca" },
+			{ "Mascara", "Rímel" },
+			{ "Nail polish", "Esmalte" }
+		};
 
 		public static readonly string[] Brands = new[]
 		{

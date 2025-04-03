@@ -10,5 +10,6 @@ namespace Maquiagem.Domain.Entidades
 	{
 		public int ProdutoId { get;set; }
 		public int CompraId { get; set; }
+		public required Compra Compra { get; set; }
 	}
 }

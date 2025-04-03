@@ -36,5 +36,11 @@ namespace Maquiagem.Infra.Services
 			var salt = Convert.ToBase64String(byteSalt);
 			return salt;
 		}
+
+		public bool VerifyHash(string senha, string salt, string storedHash, int iteration)
+		{
+			var computedHash = ComputeHash(senha, salt, iteration);
+			return computedHash == storedHash;
+		}
 	}
 }

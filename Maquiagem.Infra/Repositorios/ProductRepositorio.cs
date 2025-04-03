@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Infra.Repositorios
 {
-	public class ProductRepositorio : RepositorioBase<Product>, IProductRepositorio
+	public class ProductRepositorio : RepositorioBase<Produto>, IProductRepositorio
 	{
 		private readonly MaquiagemDbContext _context;
 
@@ -19,7 +19,7 @@ namespace Maquiagem.Infra.Repositorios
 			_context = context;
 		}
 
-		public Task<Product> GetById(long id)
+		public Task<Produto> GetById(long id)
 		{
 			throw new NotImplementedException();
 		}

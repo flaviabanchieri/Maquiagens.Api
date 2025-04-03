@@ -13,8 +13,8 @@ namespace IntegradorAnuncios.Api.Mapper
         public MappingProfile()
         {
             CreateMap<Usuario, UsuarioDto>();
-            CreateMap<Product, ProductDto>();
-            CreateMap<ProductColor, ProductColor>();
+            CreateMap<Produto, ProductDto>();
+            CreateMap<CorProduto, CorProduto>();
             CreateMap<Carrinho, CarrinhoDto>();
             CreateMap<Compra, ComprasDto>();
             CreateMap<CompraItem, ComprasItensDto>();

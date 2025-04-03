@@ -20,10 +20,18 @@ namespace Maquiagem.Infra.Repositorios
 			_context = context;
 		}
 
-		public async Task<Usuario> ObterPorEmaileSenha(UsuarioDto dto)
+		public async Task<Usuario> ObterPorEmail(UsuarioDto dto)
 		{
-			return await _context.Set<Usuario>().Where(
-				user => user.Email == dto.Email && user.Senha == dto.Senha).FirstOrDefaultAsync();
+			var usuario = await _context.Set<Usuario>().Where(
+				user => user.Email == dto.Email).FirstOrDefaultAsync();
+			return usuario;
+		}
+		public async Task<bool> ValidarUsuarioExistente(UsuarioDto dto)
+		{
+			var quantidadeDeRegistros = _context.Set<Usuario>().Where(
+				user => user.Email == dto.Email).Count();
+
+			return quantidadeDeRegistros > 0;
 		}
 
 	}

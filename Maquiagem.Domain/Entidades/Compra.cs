@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Maquiagem.Application.DTOs.Compras.ComprasItens;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,6 @@ namespace Maquiagem.Domain.Entidades
 		public int UsuarioId { get; set; }
 		public int MetodoPagamento { get; set; }
 		public required Usuario Usuario { get; set; }
+		public List<CompraItem> ComprasItens { get; set; } = new();
 	}
 }
