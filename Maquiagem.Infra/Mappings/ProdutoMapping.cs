@@ -16,11 +16,10 @@ namespace Maquiagem.Infra.Mappings
 			builder.HasKey(e => e.Id);
 
 			builder.Property(e => e.Id)
-				.IsRequired()
-				.ValueGeneratedOnAdd()
-				.UseIdentityColumn();
+				.IsRequired();
 
 			builder.Property(e => e.Brand)
+				.IsRequired(false)
 				.HasMaxLength(255);
 
 			builder.Property(e => e.Name)
@@ -28,39 +27,38 @@ namespace Maquiagem.Infra.Mappings
 				.HasMaxLength(255);
 
 			builder.Property(e => e.Price)
+				.IsRequired(false)
 				.HasMaxLength(50);
 
 			builder.Property(e => e.PriceSign)
+				.IsRequired(false)
 				.HasMaxLength(10);
 
-			builder.Property(e => e.Currency)
+			builder.Property(e => e.Currency).IsRequired(false)
 				.HasMaxLength(10);
 
-			builder.Property(e => e.ImageLink)
-				.HasMaxLength(500);
+			builder.Property(e => e.ImageLink).IsRequired(false);
 
-			builder.Property(e => e.ProductLink)
-				.HasMaxLength(500);
+			builder.Property(e => e.ProductLink).IsRequired(false);
 
-			builder.Property(e => e.WebsiteLink)
-				.HasMaxLength(500);
+			builder.Property(e => e.WebsiteLink).IsRequired(false);
 
 			builder.Property(e => e.Description)
 				.HasColumnType("TEXT");
 
-			builder.Property(e => e.Rating);
+			builder.Property(e => e.Rating).IsRequired(false);
 
-			builder.Property(e => e.Category)
+			builder.Property(e => e.ProdutoId).IsRequired(false);
+
+			builder.Property(e => e.Category).IsRequired(false)
 				.HasMaxLength(100);
 
-			builder.Property(e => e.ProductType)
+			builder.Property(e => e.ProductType).IsRequired(false)
 				.HasMaxLength(100);
 
-			builder.Property(e => e.ProductApiUrl)
-				.HasMaxLength(500);
+			builder.Property(e => e.ProductApiUrl).IsRequired(false);
 
-			builder.Property(e => e.ApiFeaturedImage)
-				.HasMaxLength(500);
+			builder.Property(e => e.ApiFeaturedImage).IsRequired(false);
 
 			builder.Property(e => e.CreatedAt)
 				.HasColumnType("DATETIME");

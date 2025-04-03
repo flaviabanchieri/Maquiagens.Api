@@ -10,9 +10,9 @@ namespace Maquiagem.Api.Controllers
 	[Tags("Favoritos")]
 	public class FavoritosController : ControllerBase
 	{
-		private readonly IProductRepositorio _productRepositorio;
+		private readonly IProdutoRepositorio _productRepositorio;
 
-		public FavoritosController(IProductRepositorio productRepositorio)
+		public FavoritosController(IProdutoRepositorio productRepositorio)
 		{
 			_productRepositorio = productRepositorio;
 		}

@@ -14,11 +14,6 @@ namespace Maquiagem.Infra.Mappings
 				.IsRequired()
 				.ValueGeneratedOnAdd().UseIdentityColumn();
 
-			builder.Property(c => c.UsuarioId)
-			.IsRequired();
-
-			builder.Property(e => e.ProdutoId)
-			.IsRequired();
 
 			builder.Property(e => e.Quantidade)
 			.IsRequired();

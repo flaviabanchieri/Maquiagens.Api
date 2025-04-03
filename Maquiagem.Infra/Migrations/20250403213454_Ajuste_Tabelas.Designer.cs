@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maquiagem.Infra.Migrations
 {
     [DbContext(typeof(MaquiagemDbContext))]
-    [Migration("20250403144722_Add_Tabelas")]
-    partial class Add_Tabelas
+    [Migration("20250403213454_Ajuste_Tabelas")]
+    partial class Ajuste_Tabelas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -49,9 +49,6 @@ namespace Maquiagem.Infra.Migrations
                     b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UsuarioId1")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
@@ -59,8 +56,6 @@ namespace Maquiagem.Infra.Migrations
                     b.HasIndex("ProdutoId");
 
                     b.HasIndex("UsuarioId");
-
-                    b.HasIndex("UsuarioId1");
 
                     b.ToTable("Carrinho", "dbo");
                 });
@@ -126,17 +121,13 @@ namespace Maquiagem.Infra.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApiFeaturedImage")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Brand")
-                        .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Category")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
@@ -144,7 +135,6 @@ namespace Maquiagem.Infra.Migrations
                         .HasColumnType("DATETIME");
 
                     b.Property<string>("Currency")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar(100)");
 
@@ -156,9 +146,7 @@ namespace Maquiagem.Infra.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageLink")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -166,27 +154,20 @@ namespace Maquiagem.Infra.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("Price")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("PriceSign")
-                        .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("ProductApiUrl")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductLink")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductType")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
@@ -201,9 +182,7 @@ namespace Maquiagem.Infra.Migrations
                         .HasColumnType("DATETIME");
 
                     b.Property<string>("WebsiteLink")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -258,10 +237,6 @@ namespace Maquiagem.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Maquiagem.Domain.Entidades.Usuario", null)
-                        .WithMany("Carrinho")
-                        .HasForeignKey("UsuarioId1");
-
                     b.Navigation("Produto");
 
                     b.Navigation("Usuario");
@@ -270,7 +245,7 @@ namespace Maquiagem.Infra.Migrations
             modelBuilder.Entity("Maquiagem.Domain.Entidades.Compra", b =>
                 {
                     b.HasOne("Maquiagem.Domain.Entidades.Usuario", "Usuario")
-                        .WithMany("Compras")
+                        .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -325,13 +300,6 @@ namespace Maquiagem.Infra.Migrations
             modelBuilder.Entity("Maquiagem.Domain.Entidades.Compra", b =>
                 {
                     b.Navigation("ComprasItens");
-                });
-
-            modelBuilder.Entity("Maquiagem.Domain.Entidades.Usuario", b =>
-                {
-                    b.Navigation("Carrinho");
-
-                    b.Navigation("Compras");
                 });
 #pragma warning restore 612, 618
         }

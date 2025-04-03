@@ -4,6 +4,7 @@ using Maquiagem.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maquiagem.Infra.Migrations
 {
     [DbContext(typeof(MaquiagemDbContext))]
-    partial class MaquiagemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250403212918_MigracaoInicial")]
+    partial class MigracaoInicial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,7 +121,8 @@ namespace Maquiagem.Infra.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ApiFeaturedImage")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Brand")
                         .HasMaxLength(255)
@@ -143,7 +147,8 @@ namespace Maquiagem.Infra.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ImageLink")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -159,17 +164,16 @@ namespace Maquiagem.Infra.Migrations
                         .HasColumnType("varchar(100)");
 
                     b.Property<string>("ProductApiUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ProductLink")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(100)");
 
                     b.Property<string>("ProductType")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
-
-                    b.Property<int?>("ProdutoId")
-                        .HasColumnType("int");
 
                     b.Property<double?>("Rating")
                         .HasColumnType("float");
@@ -182,7 +186,8 @@ namespace Maquiagem.Infra.Migrations
                         .HasColumnType("DATETIME");
 
                     b.Property<string>("WebsiteLink")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("Id");
 

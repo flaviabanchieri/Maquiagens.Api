@@ -17,9 +17,9 @@ namespace Maquiagem.Infra.Services.Externo
 	public class ProductServices : IProductService
 	{
 		private readonly HttpClient _httpClient;
-		private readonly IProductRepositorio _productRepositorio;
+		private readonly IProdutoRepositorio _productRepositorio;
 
-		public ProductServices(HttpClient httpClient, IProductRepositorio productRepositorio)
+		public ProductServices(HttpClient httpClient, IProdutoRepositorio productRepositorio)
 		{
 			_httpClient = httpClient;
 			_productRepositorio = productRepositorio;

@@ -53,19 +53,6 @@ namespace Maquiagem.Application.Utils
 			{ "Lip gloss", "Brilho Labial" },
 			{ "Lip stain", "Tinta Labial" }
 		};
-		
-		public static readonly Dictionary<string, string> Tipo = new Dictionary<string, string>
-		{
-			{ "Blush", "Blush" },
-			{ "Bronzer", "Bronzer" },
-			{ "Eyebrow", "Sobrancelha" },
-			{ "Eyeliner", "Delineador" },
-			{ "Eyeshadow", "Sombra" },
-			{ "Foundation", "Base" },
-			{ "Lip liner", "Lápis de Boca" },
-			{ "Mascara", "Rímel" },
-			{ "Nail polish", "Esmalte" }
-		};
 
 		public static readonly string[] Brands = new[]
 		{

@@ -2,6 +2,7 @@
 using Maquiagem.Domain.Entidades;
 using Maquiagem.Domain.Interfaces;
 using Maquiagem.Infra.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,18 @@ using System.Threading.Tasks;
 
 namespace Maquiagem.Infra.Repositorios
 {
-	public class ProductRepositorio : RepositorioBase<Produto>, IProductRepositorio
+	public class ProdutoRepositorio : RepositorioBase<Produto>, IProdutoRepositorio
 	{
 		private readonly MaquiagemDbContext _context;
 
-		public ProductRepositorio(MaquiagemDbContext context) : base(context)
+		public ProdutoRepositorio(MaquiagemDbContext context) : base(context)
 		{
 			_context = context;
 		}
 
-		public Task<Produto> GetById(long id)
+		public async Task<Produto> ObterPorProdutoId(int ProdutoId)
 		{
-			throw new NotImplementedException();
+			return await _context.Set<Produto>().Where(p => p.ProdutoId == ProdutoId).FirstOrDefaultAsync();
 		}
 	}
 }

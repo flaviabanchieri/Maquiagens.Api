@@ -34,8 +34,9 @@ builder.Services.AddSwaggerGen(c =>
 	{
 		Description = "JWT Authorization no header utilizando o esquema Bearer. Exemplo: \"Authorization: Bearer {token}\"",
 		Name = "Authorization",
+		BearerFormat = "JWT",
 		In = ParameterLocation.Header,
-		Type = SecuritySchemeType.ApiKey,
+		Type = SecuritySchemeType.Http,
 		Scheme = "Bearer"
 	});
 
@@ -49,9 +50,6 @@ builder.Services.AddSwaggerGen(c =>
 					Type = ReferenceType.SecurityScheme,
 					Id = "Bearer"
 				},
-				Scheme = "oauth2",
-				Name = "Bearer",
-				In = ParameterLocation.Header,
 			},
 			new List<string>()
 		}
@@ -86,25 +84,21 @@ builder.Services.AddDbContext<MaquiagemDbContext>((serviceProvider, dbContextBui
 });
 
 
-builder.Services.AddAuthentication(x =>
-{
-	x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-	x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options => {
-	options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters { 
-		//Comentei aqui para lembrar:
-		//É quem emite o token
-		ValidateIssuer = true,
-		//É para quem é emitido o token
-		ValidateAudience = true,
-		ValidateLifetime = true,
-		ValidateIssuerSigningKey = true,
-		ValidIssuer = builder.Configuration["Jwt:Issuer"],
-		ValidAudience = builder.Configuration["Jwt:Audience"],
-		//chave secreta usada para assinar
-		IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
-	};
-});
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options => {
+		options.TokenValidationParameters = new TokenValidationParameters
+		{
+			ValidateIssuer = true,
+			ValidateAudience = true,
+			ValidateLifetime = true,
+			ValidateIssuerSigningKey = true,
+			ValidIssuer = builder.Configuration["Jwt:Issuer"],
+			ValidAudience = builder.Configuration["Jwt:Audience"],
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+		};
+	});
+
+builder.Services.AddAuthorization();
 
 
 
@@ -117,8 +111,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("AllowAll");
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 app.UseSwagger();
 app.UseSwaggerUI(c =>
 {

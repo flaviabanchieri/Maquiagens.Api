@@ -5,27 +5,26 @@
 namespace Maquiagem.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Senha_Salt : Migration
+    public partial class Add_Produto_ProdutoId : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "SenhaSalt",
+            migrationBuilder.AddColumn<int>(
+                name: "ProdutoId",
                 schema: "dbo",
-                table: "Usuario",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                table: "Produto",
+                type: "int",
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "SenhaSalt",
+                name: "ProdutoId",
                 schema: "dbo",
-                table: "Usuario");
+                table: "Produto");
         }
     }
 }

@@ -10,9 +10,9 @@ namespace Maquiagem.Api.Controllers
 	[Tags("Compras")]
 	public class ComprasController : ControllerBase
 	{
-		private readonly IProductRepositorio _productRepositorio;
+		private readonly IProdutoRepositorio _productRepositorio;
 
-		public ComprasController(IProductRepositorio productRepositorio)
+		public ComprasController(IProdutoRepositorio productRepositorio)
 		{
 			_productRepositorio = productRepositorio;
 		}

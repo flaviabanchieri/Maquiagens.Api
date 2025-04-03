@@ -63,6 +63,7 @@ namespace Maquiagem.Api.Controllers
 		[HttpPost("login")]
 		public async Task<IActionResult> AutenticarUsuario([FromBody] UsuarioDto usuarioDto)
 		{
+
 			if (usuarioDto == null)
 				return BadRequest(new { mensagem = "Dados inválidos." });
 

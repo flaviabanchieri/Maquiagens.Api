@@ -29,7 +29,6 @@ namespace Maquiagem.Infra.Services
 		{
 			var claims = new[]
 			{
-				new Claim(JwtRegisteredClaimNames.Sub, _config["Jwt:Subject"]),
 				new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
 				new Claim("UserId", user.Id.ToString()),
 				new Claim("Email", user.Email.ToString()),
@@ -47,5 +46,6 @@ namespace Maquiagem.Infra.Services
 			string tokenValue = new JwtSecurityTokenHandler().WriteToken(token);
 			return tokenValue;
 		}
+
 	}
 }

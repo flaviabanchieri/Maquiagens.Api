@@ -50,11 +50,5 @@ namespace Maquiagens.Api.Controllers
 		{
 			return Ok(ConstantesDeProduto.Categorias);
 		}
-
-		[HttpGet("Tipo")]
-		public IActionResult GetTipos()
-		{
-			return Ok(ConstantesDeProduto.Tipo);
-		}
 	}
 }
