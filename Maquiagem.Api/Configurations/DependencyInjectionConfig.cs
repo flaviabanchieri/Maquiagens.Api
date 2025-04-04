@@ -21,6 +21,7 @@ namespace Maquiagem.Api.Configurations
 			services.AddHttpContextAccessor();
 			services.AddScoped<IUsuarioContextService, UsuarioContextService>();
 			services.AddScoped<ICarrinhoRepositorio, CarrinhoRepositorio>();
+			services.AddScoped<ICompraRepositorio, CompraRepositorio>();
 		}
 	}
 }

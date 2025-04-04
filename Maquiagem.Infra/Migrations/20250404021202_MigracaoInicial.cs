@@ -26,9 +26,9 @@ namespace Maquiagem.Infra.Migrations
                     Price = table.Column<string>(type: "varchar(100)", maxLength: 50, nullable: true),
                     PriceSign = table.Column<string>(type: "varchar(100)", maxLength: 10, nullable: true),
                     Currency = table.Column<string>(type: "varchar(100)", maxLength: 10, nullable: true),
-                    ImageLink = table.Column<string>(type: "varchar(100)", maxLength: 500, nullable: true),
-                    ProductLink = table.Column<string>(type: "varchar(100)", maxLength: 500, nullable: true),
-                    WebsiteLink = table.Column<string>(type: "varchar(100)", maxLength: 500, nullable: true),
+                    ImageLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProductLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WebsiteLink = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Description = table.Column<string>(type: "TEXT", nullable: false),
                     Rating = table.Column<double>(type: "float", nullable: true),
                     Category = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
@@ -36,8 +36,9 @@ namespace Maquiagem.Infra.Migrations
                     TagList = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "DATETIME", nullable: true),
                     UpdatedAt = table.Column<DateTime>(type: "DATETIME", nullable: true),
-                    ProductApiUrl = table.Column<string>(type: "varchar(100)", maxLength: 500, nullable: true),
-                    ApiFeaturedImage = table.Column<string>(type: "varchar(100)", maxLength: 500, nullable: true),
+                    ProductApiUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ApiFeaturedImage = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProdutoId = table.Column<int>(type: "int", nullable: true),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -151,8 +152,11 @@ namespace Maquiagem.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ProdutoId = table.Column<int>(type: "int", nullable: false),
                     CompraId = table.Column<int>(type: "int", nullable: false),
+                    ProdutoId = table.Column<int>(type: "int", nullable: false),
+                    UsuarioId = table.Column<int>(type: "int", nullable: false),
+                    Quantidade = table.Column<int>(type: "int", nullable: false),
+                    CorEscolhidaHex = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -166,6 +170,20 @@ namespace Maquiagem.Infra.Migrations
                         principalTable: "Compra",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CompraItem_Produto_ProdutoId",
+                        column: x => x.ProdutoId,
+                        principalSchema: "dbo",
+                        principalTable: "Produto",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_CompraItem_Usuario_UsuarioId",
+                        column: x => x.UsuarioId,
+                        principalSchema: "dbo",
+                        principalTable: "Usuario",
+                        principalColumn: "Id",
+						onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -191,6 +209,18 @@ namespace Maquiagem.Infra.Migrations
                 schema: "dbo",
                 table: "CompraItem",
                 column: "CompraId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompraItem_ProdutoId",
+                schema: "dbo",
+                table: "CompraItem",
+                column: "ProdutoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CompraItem_UsuarioId",
+                schema: "dbo",
+                table: "CompraItem",
+                column: "UsuarioId");
         }
 
         /// <inheritdoc />

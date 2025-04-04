@@ -94,10 +94,20 @@ namespace Maquiagem.Infra.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
+                    b.PrimitiveCollection<string>("CorEscolhidaHex")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -105,6 +115,10 @@ namespace Maquiagem.Infra.Migrations
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
 
                     b.HasIndex("CompraId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("CompraItem", "dbo");
                 });
@@ -261,7 +275,23 @@ namespace Maquiagem.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Maquiagem.Domain.Entidades.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Maquiagem.Domain.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("Compra");
+
+                    b.Navigation("Produto");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Maquiagem.Domain.Entidades.Produto", b =>

@@ -40,7 +40,7 @@ namespace Maquiagem.Application.DTOs.Produtos
 		public string Description { get; set; }
 
 		[JsonPropertyName("rating")]
-		public object Rating { get; set; }
+		public double? Rating { get; set; }
 
 		[JsonPropertyName("category")]
 		public string Category { get; set; }

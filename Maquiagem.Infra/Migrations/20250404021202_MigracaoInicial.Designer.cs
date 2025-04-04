@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Maquiagem.Infra.Migrations
 {
     [DbContext(typeof(MaquiagemDbContext))]
-    [Migration("20250403213454_Ajuste_Tabelas")]
-    partial class Ajuste_Tabelas
+    [Migration("20250404021202_MigracaoInicial")]
+    partial class MigracaoInicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -97,10 +97,20 @@ namespace Maquiagem.Infra.Migrations
                     b.Property<int>("CompraId")
                         .HasColumnType("int");
 
+                    b.PrimitiveCollection<string>("CorEscolhidaHex")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("ProdutoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantidade")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UsuarioId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -108,6 +118,10 @@ namespace Maquiagem.Infra.Migrations
                     SqlServerKeyBuilderExtensions.IsClustered(b.HasKey("Id"));
 
                     b.HasIndex("CompraId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("CompraItem", "dbo");
                 });
@@ -170,6 +184,9 @@ namespace Maquiagem.Infra.Migrations
                     b.Property<string>("ProductType")
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
+
+                    b.Property<int?>("ProdutoId")
+                        .HasColumnType("int");
 
                     b.Property<double?>("Rating")
                         .HasColumnType("float");
@@ -261,7 +278,23 @@ namespace Maquiagem.Infra.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Maquiagem.Domain.Entidades.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Maquiagem.Domain.Entidades.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.Navigation("Compra");
+
+                    b.Navigation("Produto");
+
+                    b.Navigation("Usuario");
                 });
 
             modelBuilder.Entity("Maquiagem.Domain.Entidades.Produto", b =>
