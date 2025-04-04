@@ -30,9 +30,15 @@ namespace Maquiagem.Infra.Repositorios
 
 		public void Remover(TEntity obj) => _dbSet.Remove(obj);
 
+		public void RemoverMutiplos(List<TEntity> lista) => _dbSet.RemoveRange(lista);
+
+		public async Task<IEnumerable<TEntity>> ListarAsyncAsNoTracking() => await _dbSet.AsNoTracking().ToListAsync();
 
 		public async Task<IEnumerable<TEntity>> BuscarAsync(Expression<Func<TEntity, bool>> predicate) =>
 			await _dbSet.Where(predicate).ToListAsync();
+
+		public async Task<IEnumerable<TEntity>> BuscarAsyncAsNoTracking(Expression<Func<TEntity, bool>> predicate) =>
+			await _dbSet.AsNoTracking().Where(predicate).ToListAsync();
 
 		public async Task<TEntity> ObterPorIdAsyncAsNoTracking(int id) =>
 			await _dbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
