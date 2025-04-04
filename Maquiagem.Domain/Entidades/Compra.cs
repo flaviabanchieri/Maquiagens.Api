@@ -21,5 +21,10 @@ namespace Maquiagem.Domain.Entidades
 			MetodoPagamento = metodoPagamento;
 			ComprasItens.AddRange(itens);
 		}
+
+		public void EditarPagamento(int metodoPagamento)
+		{
+			MetodoPagamento = metodoPagamento;
+		}
 	}
 }

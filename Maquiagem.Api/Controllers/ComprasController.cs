@@ -7,9 +7,11 @@ using Maquiagem.Domain.Entidades;
 using AutoMapper;
 using Maquiagem.Application.Interfaces;
 using Maquiagem.Application.DTOs.Compras;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Maquiagem.Api.Controllers
 {
+	[Authorize]
 	[ApiController]
 	[Route("api/compras")]
 	[Tags("Compras")]
@@ -39,7 +41,28 @@ namespace Maquiagem.Api.Controllers
 		{
 			try
 			{
-				return Ok();
+				int userId = _usuarioContextService.PegarUsuarioIdLogado();
+				var compras = await _compraRepositorio.ObterPorUsuarioId(userId);
+				var retorno = _mapper.Map<List<ComprasDto>>(compras);
+				return Ok(retorno);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(ex.Message);
+			}
+		}
+
+		[HttpGet("ObterParaPagamento/{id}")]
+		public async Task<IActionResult> ObterParaPagamento(int id)
+		{
+			try
+			{
+				var compras = _compraRepositorio.ObterPorIdParaPagamento(id);
+
+				if (compras == null)
+					return NotFound(new { mensagem = "Compra não encontrada para o usuário informado." });
+
+				return Ok(compras);
 			}
 			catch (Exception ex)
 			{
@@ -71,6 +94,31 @@ namespace Maquiagem.Api.Controllers
 			var retorno = _mapper.Map<ComprasDto>(compra);
 			return Ok(retorno);
 
+		}
+
+		[HttpPatch("{id}")]
+		public async Task<IActionResult> EditarPagamento(int id, [FromBody] ComprasDto dto)
+		{
+			if (id == 0)
+				return BadRequest(new { mensagem = "ID da compra é obrigatório." });
+
+			try
+			{
+				var compra = await _compraRepositorio.ObterPorIdAsync(id);
+
+				if (compra == null)
+					return NotFound(new { mensagem = "Metodo não encontrado" });
+
+				compra.EditarPagamento(dto.MetodoPagamento);
+				_compraRepositorio.Atualizar(compra);
+
+				var commitResult = _unitOfWork.Commit();
+				return Ok(commitResult.Success);
+			}
+			catch (Exception ex)
+			{
+				return BadRequest(new { mensagem = "Ocorreu um erro ao editar o pagamento.", erro = ex.Message });
+			}
 		}
 	}
 }

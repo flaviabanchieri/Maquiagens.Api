@@ -1,18 +1,10 @@
 ﻿using AutoMapper;
-using Maquiagem.Application.DTOs.Auth;
 using Maquiagem.Application.DTOs.Carrinho;
-using Maquiagem.Application.DTOs.Produtos;
 using Maquiagem.Application.Interfaces;
 using Maquiagem.Domain.Entidades;
 using Maquiagem.Domain.Interfaces;
-using Maquiagem.Infra.Context;
-using Maquiagem.Infra.Services;
-using Maquiagem.Infra.Services.Externo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Claims;
 
 namespace Maquiagem.Api.Controllers
 {
@@ -105,28 +97,6 @@ namespace Maquiagem.Api.Controllers
 			catch (Exception ex)
 			{
 				return BadRequest(ex.Message);
-			}
-		}
-
-		[HttpPost("editar")]
-		public async Task<IActionResult> Editar([FromBody]CarrinhoDto dto)
-		{
-			try
-			{
-				var carrinho = await _carrinhoRepositorio.ObterPorIdAsync((int)dto.Id);
-
-				if (carrinho == null)
-					return NotFound(new { mensagem = "Carrinho não encontrado" });
-
-				carrinho.EditarCarrinho(dto.Quantidade, dto.CorEscolhidaHex);
-				_carrinhoRepositorio.Atualizar(carrinho);
-
-				var commitResult = _unitOfWork.Commit();
-				return Ok(commitResult.Success);
-			}
-			catch (Exception ex)
-			{
-				return BadRequest(new { mensagem = "Ocorreu um erro ao editar o carrinho.", erro = ex.Message });
 			}
 		}
 

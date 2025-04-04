@@ -13,8 +13,8 @@ namespace Maquiagem.Application.DTOs.Produtos
 		public string? ProductCategory { get; set; }
 		public List<string>? ProductTags { get; set; }
 		public string? Brand { get; set; }
-		public decimal? PriceGreaterThan { get; set; }
-		public decimal? PriceLessThan { get; set; }
+		public int? PriceGreaterThan { get; set; }
+		public int? PriceLessThan { get; set; }
 		public double? RatingGreaterThan { get; set; }
 		public double? RatingLessThan { get; set; }
 	}
