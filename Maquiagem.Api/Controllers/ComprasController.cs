@@ -1,6 +1,4 @@
-﻿using Maquiagem.Application.DTOs.Carrinho;
-using Maquiagem.Application.DTOs.Compras.ComprasItens;
-using Maquiagem.Application.DTOs.Produtos;
+﻿using Maquiagem.Application.DTOs.Produtos;
 using Maquiagem.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Maquiagem.Domain.Entidades;

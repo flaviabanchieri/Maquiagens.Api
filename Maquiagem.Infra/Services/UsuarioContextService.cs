@@ -1,9 +1,6 @@
-﻿using System;
-using System.Linq;
-using System.Security.Claims;
+﻿using Maquiagem.Application.Interfaces;
 using Microsoft.AspNetCore.Http;
-using Maquiagem.Application.DTOs.Auth;
-using Maquiagem.Application.Interfaces;
+using System.Security.Claims;
 
 namespace Maquiagem.Infra.Services
 {

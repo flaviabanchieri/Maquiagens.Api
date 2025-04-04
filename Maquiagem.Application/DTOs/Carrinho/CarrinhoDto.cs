@@ -1,10 +1,4 @@
-﻿using Maquiagem.Application.DTOs.Auth;
-using Maquiagem.Application.DTOs.Produtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Maquiagem.Application.DTOs.Produtos;
 
 namespace Maquiagem.Application.DTOs.Carrinho
 {

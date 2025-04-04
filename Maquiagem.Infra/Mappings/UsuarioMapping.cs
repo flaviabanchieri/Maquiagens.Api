@@ -1,11 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
+﻿using Maquiagem.Domain.Entidades;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Maquiagem.Domain.Entidades;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Maquiagem.Infra.Mappings
 {

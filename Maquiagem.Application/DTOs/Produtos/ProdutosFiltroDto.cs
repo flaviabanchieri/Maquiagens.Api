@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Maquiagem.Application.DTOs.Produtos
+﻿namespace Maquiagem.Application.DTOs.Produtos
 {
 	public class ProdutosFiltroDto
 	{
@@ -15,7 +9,5 @@ namespace Maquiagem.Application.DTOs.Produtos
 		public string? Brand { get; set; }
 		public int? PriceGreaterThan { get; set; }
 		public int? PriceLessThan { get; set; }
-		public double? RatingGreaterThan { get; set; }
-		public double? RatingLessThan { get; set; }
 	}
 }

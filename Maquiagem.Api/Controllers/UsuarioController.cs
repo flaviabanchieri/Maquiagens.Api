@@ -1,11 +1,8 @@
 ﻿using Maquiagem.Application.DTOs.Auth;
 using Maquiagem.Application.Interfaces;
-using Maquiagem.Application.Utils;
 using Maquiagem.Domain.Entidades;
 using Maquiagem.Domain.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace Maquiagem.Api.Controllers
 {

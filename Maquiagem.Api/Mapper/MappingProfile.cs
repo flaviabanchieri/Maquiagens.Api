@@ -16,8 +16,7 @@ namespace IntegradorAnuncios.Api.Mapper
             CreateMap<Produto, ProductDto>();
             CreateMap<CorProduto, CorProduto>();
             CreateMap<Carrinho, CarrinhoDto>();
-            CreateMap<Compra, ComprasDto>();
-            CreateMap<ComprasDto, Compra>();
+            CreateMap<Compra, ComprasDto>().ReverseMap();
             CreateMap<CompraItem, ComprasItensDto>();
         }
     }

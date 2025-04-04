@@ -1,5 +1,4 @@
-﻿using Maquiagem.Application.Interfaces;
-using System.Linq.Expressions;
+﻿using System.Linq.Expressions;
 
 namespace Maquiagem.Domain.Interfaces
 {

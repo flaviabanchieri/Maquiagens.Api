@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Maquiagem.Domain.Entidades
+﻿namespace Maquiagem.Domain.Entidades
 {
 	public class Produto : EntityBase<Produto>
 	{

@@ -1,15 +1,7 @@
 ﻿using Maquiagem.Application.DTOs.Produtos;
 using Maquiagem.Application.Interfaces;
-using Maquiagem.Domain.Entidades;
 using Maquiagem.Domain.Interfaces;
-using Maquiagem.Infra.Data;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Json;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Web;
 
 namespace Maquiagem.Infra.Services.Externo

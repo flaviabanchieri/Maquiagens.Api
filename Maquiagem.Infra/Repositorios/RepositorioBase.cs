@@ -1,10 +1,8 @@
-﻿using Maquiagem.Domain.Interfaces;
-using Maquiagem.Domain.Entidades;
+﻿using Maquiagem.Domain.Entidades;
+using Maquiagem.Domain.Interfaces;
+using Maquiagem.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using Maquiagem.Infra.Data;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Maquiagem.Application.Interfaces;
 
 namespace Maquiagem.Infra.Repositorios
 {

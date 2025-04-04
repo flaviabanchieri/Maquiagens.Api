@@ -1,17 +1,10 @@
 ﻿using Maquiagem.Application.DTOs.Auth;
 using Maquiagem.Application.Interfaces;
-using Maquiagem.Domain.Entidades;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Maquiagem.Infra.Services
 {
