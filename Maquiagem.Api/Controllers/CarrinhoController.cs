@@ -130,7 +130,7 @@ namespace Maquiagem.Api.Controllers
 			}
 		}
 
-		[HttpDelete("deletar/{id}")]
+		[HttpDelete("{id}")]
 		public async Task<IActionResult> Apagar(int id)
 		{
 			try
