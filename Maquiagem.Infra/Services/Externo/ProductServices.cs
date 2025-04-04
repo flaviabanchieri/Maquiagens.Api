@@ -64,8 +64,6 @@ namespace Maquiagem.Infra.Services.Externo
 			if (!string.IsNullOrEmpty(filtro.Brand)) queryParams["brand"] = filtro.Brand;
 			if (filtro.PriceGreaterThan.HasValue) queryParams["price_greater_than"] = filtro.PriceGreaterThan.Value.ToString();
 			if (filtro.PriceLessThan.HasValue) queryParams["price_less_than"] = filtro.PriceLessThan.Value.ToString();
-			if (filtro.RatingGreaterThan.HasValue) queryParams["rating_greater_than"] = filtro.RatingGreaterThan.Value.ToString("F1");
-			if (filtro.RatingLessThan.HasValue) queryParams["rating_less_than"] = filtro.RatingLessThan.Value.ToString("F1");
 
 			var queryString = queryParams.ToString();
 			return string.IsNullOrEmpty(queryString) ? string.Empty : "?" + queryString;
