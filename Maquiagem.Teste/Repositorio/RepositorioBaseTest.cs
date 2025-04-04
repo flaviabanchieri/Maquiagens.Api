@@ -18,7 +18,7 @@ namespace Maquiagem.Teste.Repositorio
 		public void Setup()
 		{
 			var options = new DbContextOptionsBuilder<MaquiagemDbContext>()
-				.UseInMemoryDatabase(databaseName: "TestDb_Base")
+				.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
 				.Options;
 
 			_context = new MaquiagemDbContext(options);
@@ -40,7 +40,7 @@ namespace Maquiagem.Teste.Repositorio
 
 			// Act
 			await _repositorio.AdicionarAsync(usuario);
-			await _context.SaveChangesAsync(); // Necessário para persistir
+			_context.SaveChanges();
 
 			// Assert
 			var usuarios = await _context.Set<Usuario>().ToListAsync();
@@ -54,12 +54,12 @@ namespace Maquiagem.Teste.Repositorio
 			// Arrange
 			var usuario = new Usuario { Nome = "Antes", Email = "teste@atualizar.com", Senha = "123", SenhaSalt = "salt" };
 			await _repositorio.AdicionarAsync(usuario);
-			await _context.SaveChangesAsync();
+			_context.SaveChanges();
 
 			// Act
 			usuario.Nome = "Depois";
 			_repositorio.Atualizar(usuario);
-			await _context.SaveChangesAsync();
+			_context.SaveChanges();
 
 			var atualizado = await _repositorio.ObterPorIdAsync(usuario.Id);
 
@@ -73,11 +73,11 @@ namespace Maquiagem.Teste.Repositorio
 			// Arrange
 			var usuario = new Usuario { Nome = "Para Remover", Email = "remover@email.com", Senha = "123", SenhaSalt = "salt" };
 			await _repositorio.AdicionarAsync(usuario);
-			await _context.SaveChangesAsync();
+			_context.SaveChanges();
 
 			// Act
 			_repositorio.Remover(usuario);
-			await _context.SaveChangesAsync();
+			_context.SaveChanges();
 
 			var resultado = await _repositorio.ObterPorIdAsync(usuario.Id);
 
@@ -95,7 +95,7 @@ namespace Maquiagem.Teste.Repositorio
 		new Usuario { Nome = "Bruna", Email = "bruna@email.com", Senha = "456", SenhaSalt = "2" },
 		new Usuario { Nome = "Carlos", Email = "carlos@email.com", Senha = "789", SenhaSalt = "3" }
 	});
-			await _context.SaveChangesAsync();
+			_context.SaveChanges();
 
 			// Act
 			var resultado = await _repositorio.BuscarAsync(u => u.Nome.Contains("a"));
@@ -111,7 +111,7 @@ namespace Maquiagem.Teste.Repositorio
 			// Arrange
 			var usuario = new Usuario { Nome = "Teste ID", Email = "id@email.com", Senha = "id", SenhaSalt = "salt" };
 			await _repositorio.AdicionarAsync(usuario);
-			await _context.SaveChangesAsync();
+			_context.SaveChanges();
 
 			var usuarioId = usuario.Id;
 

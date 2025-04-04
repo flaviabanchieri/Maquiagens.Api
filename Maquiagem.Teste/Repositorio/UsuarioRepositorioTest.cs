@@ -18,7 +18,7 @@ namespace Maquiagem.Teste.Repositorio
 		public void Setup()
 		{
 			var options = new DbContextOptionsBuilder<MaquiagemDbContext>()
-				.UseInMemoryDatabase(databaseName: "TestDb")
+				.UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
 				.Options;
 
 			_context = new MaquiagemDbContext(options);
