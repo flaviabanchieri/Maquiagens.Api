@@ -85,7 +85,11 @@ namespace Maquiagem.Api.Controllers
 
 			Compra compra = new Compra(usuarioId, dto.MetodoPagamento, comprasItens);
 			var carrinho = await _carrinhoRepositorio.ObterPorUsuarioId(usuarioId);
-			_carrinhoRepositorio.RemoverMutiplos(carrinho);
+
+			foreach (var item in carrinho)
+			{
+				_carrinhoRepositorio.Remover(item);
+			}
 			await _compraRepositorio.AdicionarAsync(compra);
 			var commitResult = _unitOfWork.Commit();
 			if (!commitResult.Success)

@@ -38,7 +38,6 @@
     <ProjectReference Include="..\Maquiagem.Application\Maquiagem.Application.csproj" />
     <ProjectReference Include="..\Maquiagem.Domain\Maquiagem.Domain.csproj" />
     <ProjectReference Include="..\Maquiagem.Infra\Maquiagem.Infra.csproj" />
-    <ProjectReference Include="..\Maquiagem.Testes\Maquiagem.Testes.csproj" />
   </ItemGroup>
 
 </Project>
