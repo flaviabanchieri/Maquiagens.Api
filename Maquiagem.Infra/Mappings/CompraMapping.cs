@@ -8,7 +8,7 @@ namespace Maquiagem.Infra.Mappings
 	{
 		public void Configure(EntityTypeBuilder<Compra> builder)
 		{
-			builder.HasKey(e => e.Id).IsClustered();
+			builder.HasKey(e => e.Id);
 
 			builder.Property(e => e.Id)
 				.IsRequired()

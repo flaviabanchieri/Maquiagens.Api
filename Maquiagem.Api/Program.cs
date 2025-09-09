@@ -78,7 +78,7 @@ var connectionString = string.Empty;
 builder.Services.AddDbContext<MaquiagemDbContext>((serviceProvider, dbContextBuilder) =>
 {
 	connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-	dbContextBuilder.UseSqlServer(connectionString);
+	dbContextBuilder.UseNpgsql(connectionString);
 
 });
 
