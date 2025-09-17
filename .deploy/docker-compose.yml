@@ -1,0 +1,16 @@
+services:
+
+  web:
+    image: maquiagem.flaviabanchieri.com/api
+    build:
+      context: ..
+      dockerfile: .deploy/Dockerfile
+    networks:
+      - net
+    environment:
+      - TZ=America/Campo_Grande
+
+networks:
+  net:
+    name: npm
+    external: true
